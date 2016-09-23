@@ -1,0 +1,10 @@
+com\chenrd\ehcache\QueryExampleParameter.class
+com\chenrd\ehcache\EhcacheBuilder.class
+com\chenrd\ehcache\ExampleBuilder.class
+com\chenrd\ehcache\EhcacheType.class
+com\chenrd\ehcache\EhcacheFactory.class
+com\chenrd\ehcache\EhcacheExample.class
+com\chenrd\ehcache\BaseEhcache.class
+com\chenrd\ehcache\PersistenceEhcache.class
+com\chenrd\ehcache\CacheInterface.class
+com\chenrd\ehcache\AbstractExample.class
