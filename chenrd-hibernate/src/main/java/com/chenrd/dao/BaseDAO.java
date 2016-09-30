@@ -22,10 +22,11 @@ import com.chenrd.example.Example;
  * 
  * @author chenrd
  * @version 2015年5月15日
+ * @param <D>
  * @see BaseDAO
  * @since
  */
-public interface BaseDAO 
+public interface BaseDAO extends DAO
 {
     
     List<? extends Example> findPaging(String hql, String countHql, Map<String, Serializable> params, Paging paging);
@@ -38,7 +39,6 @@ public interface BaseDAO
      * @see
      */
     List<? extends Example> find(String hql, Map<String, Serializable> params);
-    
     /**
      * 
      * 
@@ -78,15 +78,6 @@ public interface BaseDAO
      */
     <T extends Domain> List<T> findByProperty(Class<T> clazz, String[] paramNames, Object[] paramValues, String orderName, String descName);
     
-    /**
-     * 
-     * 
-     * @param hql
-     * @param params
-     * @return 
-     * @see
-     */
-    Long count(String hql, Map<String, Serializable> params);
     
     /**
      * 
@@ -272,4 +263,5 @@ public interface BaseDAO
      * @see
      */
     int executeQueryNameArray(String queryName, Serializable... params);
+
 }
