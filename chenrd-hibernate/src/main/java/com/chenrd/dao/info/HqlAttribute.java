@@ -45,6 +45,9 @@ public class HqlAttribute implements Serializable
         super();
         this.fieldName = fieldName;
         this.params = params;
+        if (!params.hql().equals("")) {
+        	this.fieldName = params.hql();
+        }
     }
 
     /**

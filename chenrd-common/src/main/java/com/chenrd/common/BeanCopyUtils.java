@@ -94,7 +94,7 @@ public final class BeanCopyUtils
     public static Object getFieldValue(Object form, Class<?> formClass, Field field)
     {
         String prefix = "get";
-        if (field.getType().isAssignableFrom(boolean.class) || field.getType().isAssignableFrom(Boolean.class))
+        if (field.getType().isAssignableFrom(boolean.class))
             prefix = "is";
         Method mehtod = getMethod(formClass, generateMethodName(prefix, field.getName()));
         if (mehtod == null) return null;

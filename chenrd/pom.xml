@@ -96,5 +96,6 @@
 		<module>../chenrd-business</module>
 		
 		<module>../chenrd-quartz</module>
+		<module>chenrd-test</module>
 	</modules>
 </project>

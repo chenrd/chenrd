@@ -21,14 +21,23 @@ package com.chenrd.dao.em;
  */
 public enum Nexus {
     
-    EQUAL("="), GT(">"), LT("<"), LIKE("like"), BETWEEN("between"), GTEQUAL(">="), LTEQUAL("<="), IN("in");
+    EQUAL("="), GT(">"), LT("<"), LIKE("like"), BETWEEN("between"), GTEQUAL(">="), LTEQUAL("<="), IN("in"), P_AND("bitand", 2);
+	
     /**
      * 符号
      */
     public String sign;
     
+    public int type = 1;
+    
     Nexus(String sign)
     {
         this.sign = sign;
+    }
+    
+    Nexus(String sign, int type)
+    {
+        this.sign = sign;
+        this.type = type;
     }
 }

@@ -205,7 +205,7 @@ public final class BeanUtil
     private static String getFieldMethodName(Field field) 
     {
         String getMethod = "";
-        if (field.getType().isAssignableFrom(boolean.class) || field.getType().isAssignableFrom(Boolean.class)) 
+        if (field.getType().isAssignableFrom(boolean.class)) 
         {
             getMethod = "is";
         } 

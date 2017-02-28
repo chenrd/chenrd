@@ -124,6 +124,8 @@ public interface BaseDAO extends DAO
      */
     <T extends Serializable> List<T> findQueryName(String queryName, Map<String, Serializable> params);
     
+    Long countQueryName(String queryName, Map<String, Serializable> params);
+    
     /**
      * 
      * 保存或更新

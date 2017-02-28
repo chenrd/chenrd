@@ -149,8 +149,12 @@ public abstract class AbstractBaseDAO<K extends Domain> implements InitializingB
         StringBuilder hql = new StringBuilder("from ").append(clazz.getSimpleName()).append(" as po where 1=1").insert(0, "select count(*) ");
         for (int i = 0; i < paramNames.length; i++)
         {
-            hql.append(" and po.").append(paramNames[i]).append("=:").append(paramNames[i]);
-            params.put(paramNames[i], (Serializable) paramValues[i]);
+            if (paramNames[i] == null) {
+                hql.append(" and po.").append(paramNames[i]).append(" is null");
+            } else {
+                hql.append(" and po.").append(paramNames[i]).append("=:").append(paramNames[i]);
+                params.put(paramNames[i], (Serializable) paramValues[i]);
+            }
         }
         Query query = createQuery(hql.toString(), params);
         return (Long) query.list().get(0);
@@ -191,6 +195,16 @@ public abstract class AbstractBaseDAO<K extends Domain> implements InitializingB
         Query qeury = getSession().getNamedQuery(queryName);
         qeury.setProperties(params);
         return qeury.list();
+    }
+    
+    @Override
+    public Long countQueryName(String queryName, Map<String, Serializable> params)
+    {
+        Query qeury = getSession().getNamedQuery(queryName);
+        qeury.setProperties(params);
+        List<Long> ls = qeury.list();
+        if (ls == null || ls.isEmpty()) return 0l;
+        return ls.get(0);
     }
 
     @Override

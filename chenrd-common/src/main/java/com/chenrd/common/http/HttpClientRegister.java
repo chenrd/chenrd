@@ -11,6 +11,8 @@
 package com.chenrd.common.http;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -345,12 +347,19 @@ public class HttpClientRegister
             {
                 if (!((params.get(key)) instanceof String) || ((String) params.get(key)).indexOf(":") == -1) url += (url.indexOf("?") == -1 ? '?' : '&') + key + '=' + params.get(key);
                 else {
-                    for (String str : ((String) params.get(key)).split(":"))
-                        url += (url.indexOf("?") == -1 ? '?' : '&') + key + '=' + str;
+                    for (String str : ((String) params.get(key)).split(":")) {
+                    	url += (url.indexOf("?") == -1 ? '?' : '&') + key + '=';
+                    	try {
+                    		url += URLEncoder.encode(str, "utf-8");
+                    	} catch (UnsupportedEncodingException e) {
+                    		url += str;
+                    		LOG.error("uri eccode fail, uri=[{}] case=[{}]", str, e.getMessage());
+						}
+                    }
                 }
             }
         }
-        HttpGet httppost = new HttpGet(UriUtils.encodeUri(url, "UTF-8"));
+        HttpGet httppost = new HttpGet(url);
         return this.call(httppost, null, type);
     }
     
@@ -358,17 +367,12 @@ public class HttpClientRegister
     {
         HttpEntity uefEntity = null;
         CloseableHttpResponse response = null;
-        try
-        {
-            if (type == RequestParamType.STRING)
-            {
+        try {
+            if (type == RequestParamType.STRING) {
                 List<NameValuePair> formparams = new ArrayList<NameValuePair>();
-                if (request instanceof HttpPost)
-                {
-                    if (params != null)
-                    {
-                        for (String key : params.keySet())
-                        {
+                if (request instanceof HttpPost) {
+                    if (params != null) {
+                        for (String key : params.keySet()) {
                             if (!((params.get(key)) instanceof String) || ((String) params.get(key)).indexOf(":") == -1) formparams.add(new BasicNameValuePair(key, params.get(key).toString()));
                             else {
                                 for (String str : ((String) params.get(key)).split(":")) {
@@ -381,8 +385,7 @@ public class HttpClientRegister
                     ((HttpPost) request).setEntity(uefEntity);
                 }
             }
-            else if (type == RequestParamType.JSON)
-            {
+            else if (type == RequestParamType.JSON) {
                 request.setHeader("Accept", "application/json, text/plain, */*");
                 request.setHeader("Content-Type", "application/json;charset=UTF-8");
                 uefEntity = new StringEntity(params.toString());

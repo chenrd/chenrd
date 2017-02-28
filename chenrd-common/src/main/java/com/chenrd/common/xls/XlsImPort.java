@@ -228,6 +228,13 @@ public class XlsImPort<T>
                 if (!value.getClass().isAssignableFrom(String.class) && method.getParameterTypes()[0].isAssignableFrom(String.class))
                 {
                     value = value + "";
+                } else if (value instanceof BigDecimal) {
+                	if (method.getParameterTypes()[0].isAssignableFrom(float.class) || method.getParameterTypes()[0].isAssignableFrom(Float.class)) {
+                		value = ((BigDecimal) value).floatValue();
+                	} else 
+                	if (method.getParameterTypes()[0].isAssignableFrom(double.class) || method.getParameterTypes()[0].isAssignableFrom(Double.class)) {
+                		value = ((BigDecimal) value).floatValue();
+                	}
                 }
                 method.invoke(person, value);
             }

@@ -24,9 +24,11 @@ import com.chenrd.dao.em.Nexus;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface QueryParams {
     
-    String name() default "";
+    String name() default ""; //VO中可能用不同的名称
     
-    String value() default "and"; 
+    String value() default "and"; //关系 
+    
+    String hql() default "";
     
     /**
      * 添加括号

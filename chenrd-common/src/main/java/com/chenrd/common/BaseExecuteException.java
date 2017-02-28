@@ -19,24 +19,43 @@ package com.chenrd.common;
  * @see BaseExecuteException
  * @since
  */
-public class BaseExecuteException extends RuntimeException
-{
+public class BaseExecuteException extends RuntimeException {
 
     /**
      * 意义，目的和功能，以及被用到的地方<br>
      */
     private static final long serialVersionUID = 5697522937198492344L;
     
-    /**
+    private int errorCode = 0;
+    
+    public BaseExecuteException(int errorCode) {
+    	super("错误代码：" + errorCode);
+    }
+
+	/**
      * 
      * @param msg
      */
-    public BaseExecuteException(String msg)
-    {
+    public BaseExecuteException(String msg) {
         super(msg);
     }
     
     public BaseExecuteException(String message, Throwable cause) {
         super(message, cause);
     }
+    
+    
+    /**
+	 * @return Returns the errorCode.
+	 */
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	/**
+	 * @param errorCode The errorCode to set.
+	 */
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
+	}
 }

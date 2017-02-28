@@ -39,12 +39,12 @@ import com.chenrd.common.ocp.DateFormat;
  * @see XlsExPort
  * @since
  */
-public class XlsExPort<T> implements Export
+public class XlsExPort implements Export
 {
     
     private final static Logger LOG = LoggerFactory.getLogger(XlsExPort.class);
     
-    private static final String[] methodPrefix = new String[]{"get", "is"};
+    private static String[] methodPrefix = new String[]{"get", "is"};
     
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
@@ -56,10 +56,6 @@ public class XlsExPort<T> implements Export
     
     private CellStyle baseStyle = workbook.createCellStyle();
     
-    private List<T> list;
-    
-    private Class<T> clazz;
-    
     private XSSFSheet sheet;
     
     private int columnIndex = 0;
@@ -68,7 +64,7 @@ public class XlsExPort<T> implements Export
     
     private Field field;
     
-    public XlsExPort(Class<T> clazz, List<T> list, String sheetTitle)
+    public XlsExPort()
     {
         titleStyle = workbook.createCellStyle();
         titleStyle.setBorderBottom((short) 1);
@@ -88,24 +84,21 @@ public class XlsExPort<T> implements Export
         baseStyle.setBorderLeft((short) 1);
         baseStyle.setBorderTop((short) 1);
         baseStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-        
-        this.list = list;
-        this.clazz = clazz;
-        
-        sheet = workbook.createSheet(sheetTitle);
-        sheet.setDefaultRowHeightInPoints(20);  
-        exportWorkbook();
     }
     
-    public XSSFWorkbook export()
+    public <T> XSSFWorkbook export(String sheetTitle, List<T> list, Class<T> clas)
     {
+    	sheet = workbook.createSheet(sheetTitle);
+        sheet.setDefaultRowHeightInPoints(20);  
+        exportWorkbook(sheetTitle, list, clas);
+        columnIndex = 0;
         return workbook;
     }
     
-    private void exportWorkbook()
+    private <T> void exportWorkbook(String sheetTitle, List<T> list, Class<T> clas)
     {
         XSSFRow titleRow = sheet.createRow(0);
-        for (Field field : clazz.getDeclaredFields())
+        for (Field field : clas.getDeclaredFields())
         {
             XlsPortAnnotate annotate = field.getAnnotation(XlsPortAnnotate.class);
             if (annotate == null || !annotate.isExport())
@@ -120,12 +113,12 @@ public class XlsExPort<T> implements Export
             try
             {
                 if (field.getType().isAssignableFrom(boolean.class) || field.getType().isAssignableFrom(Boolean.class))
-                    method = clazz.getDeclaredMethod(methodPrefix[1] + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+                    method = clas.getDeclaredMethod(methodPrefix[1] + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
                 else
-                    method = clazz.getDeclaredMethod(methodPrefix[0] + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+                    method = clas.getDeclaredMethod(methodPrefix[0] + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
                 
                 this.field = field;
-                iterationRow();
+                iterationRow(list);
             }
             catch (NoSuchMethodException | SecurityException e)
             {
@@ -139,11 +132,11 @@ public class XlsExPort<T> implements Export
             }
             columnIndex++;
         }
-        if (clazz.getGenericSuperclass() != null)
-            exportGenericSuperclass((Class<?>) clazz.getGenericSuperclass());
+        if (clas.getGenericSuperclass() != null)
+            exportGenericSuperclass((Class<?>) clas.getGenericSuperclass(), list);
     }
     
-    private void iterationRow() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    private <T> void iterationRow(List<T> list) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         DateFormat format = null;
         int rowIndex = 1;
@@ -179,7 +172,7 @@ public class XlsExPort<T> implements Export
         }
     }
     
-    private void exportGenericSuperclass(Class<?> clazz)
+    private <T> void exportGenericSuperclass(Class<?> clazz, List<T> list)
     {
         for (Field field : clazz.getDeclaredFields())
         {
@@ -193,7 +186,7 @@ public class XlsExPort<T> implements Export
                     method = clazz.getDeclaredMethod(methodPrefix[0] + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
                 
                 this.field = field;
-                iterationRow();
+                iterationRow(list);
             }
             catch (NoSuchMethodException | SecurityException e)
             {
@@ -207,6 +200,7 @@ public class XlsExPort<T> implements Export
             }
         }
         if (clazz.getGenericSuperclass() != null)
-            exportGenericSuperclass((Class<?>) clazz.getGenericSuperclass());
+            exportGenericSuperclass((Class<?>) clazz.getGenericSuperclass(), list);
     }
+
 }
