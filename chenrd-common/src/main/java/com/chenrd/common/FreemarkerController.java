@@ -18,14 +18,14 @@ import net.sf.json.JSONObject;
  * 
  * @author chenrd
  * @version 2015年5月15日
- * @see FreemakerController
+ * @see FreemarkerController
  * @since
  */
-public class FreemakerController
+public class FreemarkerController
 {
     protected Logger logger = null;
     
-    public FreemakerController()
+    public FreemarkerController()
     {
         logger = LoggerFactory.getLogger(this.getClass());
     }

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.chenrd</groupId>
   <artifactId>chenrd</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <build>
@@ -96,5 +96,6 @@
 		<module>../chenrd-business</module>
 		
 		<module>../chenrd-quartz</module>
+		<module>chenrd-test</module>
 	</modules>
 </project>

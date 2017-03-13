@@ -36,7 +36,6 @@ public class HqlAttribute implements Serializable
     private DateFormat dateFormat;
     
     
-
     /**
      * @param fieldName
      * @param params
@@ -46,6 +45,21 @@ public class HqlAttribute implements Serializable
         super();
         this.fieldName = fieldName;
         this.params = params;
+        if (!params.hql().equals("")) {
+        	this.fieldName = params.hql();
+        }
+    }
+
+    /**
+     * @param fieldName
+     * @param params
+     */
+    public HqlAttribute(String fieldName, QueryParams params, DateFormat dateFormat)
+    {
+        super();
+        this.fieldName = fieldName;
+        this.params = params;
+        this.dateFormat = dateFormat;
     }
 
     /**

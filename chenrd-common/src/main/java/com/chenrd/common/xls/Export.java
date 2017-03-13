@@ -11,9 +11,11 @@
 
 package com.chenrd.common.xls;
 
+import java.util.List;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public interface Export
 {
-    XSSFWorkbook export();
+    <T> XSSFWorkbook export(String sheetTitle, List<T> list, Class<T> clas);
 }

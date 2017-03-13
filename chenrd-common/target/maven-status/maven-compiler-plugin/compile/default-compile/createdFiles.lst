@@ -11,7 +11,6 @@ com\chenrd\common\http\exception\AnalysisException.class
 com\chenrd\common\http\impl\HtmlAnalytical.class
 com\chenrd\common\JQueryTableResult.class
 com\chenrd\common\http\UriUtils.class
-com\chenrd\common\FreemakerController.class
 com\chenrd\common\BaseExecuteException.class
 com\chenrd\common\http\impl\PhpAnalytical.class
 com\chenrd\common\http\StrAnalytical.class

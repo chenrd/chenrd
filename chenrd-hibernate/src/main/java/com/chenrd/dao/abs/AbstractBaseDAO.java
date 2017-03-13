@@ -12,6 +12,7 @@
 package com.chenrd.dao.abs;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.chenrd.common.Paging;
 import com.chenrd.dao.BaseDAO;
@@ -37,9 +39,22 @@ import com.chenrd.example.Example;
  * @since
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractBaseDAO implements BaseDAO
+public abstract class AbstractBaseDAO<K extends Domain> implements InitializingBean, BaseDAO
 {
     
+    protected Class<K> clas;
+    
+    
+    @Override
+    public void afterPropertiesSet() throws Exception
+    {
+        clas = (Class<K>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+    
+    public Class<K> getDomClass()
+    {
+        return clas;
+    }
     /**
      * 
      */
@@ -98,8 +113,12 @@ public abstract class AbstractBaseDAO implements BaseDAO
         StringBuilder hql = new StringBuilder("from ").append(clazz.getSimpleName()).append(" as po where 1=1");
         for (int i = 0; i < paramNames.length; i++)
         {
-            hql.append(" and po.").append(paramNames[i]).append("=:").append(paramNames[i]);
-            params.put(paramNames[i], (Serializable) paramValues[i]);
+            if (paramNames[i] == null) {
+                hql.append(" and po.").append(paramNames[i]).append(" is null");
+            } else {
+                hql.append(" and po.").append(paramNames[i]).append("=:").append(paramNames[i]);
+                params.put(paramNames[i], (Serializable) paramValues[i]);
+            }
         }
         if (StringUtils.isNotBlank(orderName))
         {
@@ -130,8 +149,12 @@ public abstract class AbstractBaseDAO implements BaseDAO
         StringBuilder hql = new StringBuilder("from ").append(clazz.getSimpleName()).append(" as po where 1=1").insert(0, "select count(*) ");
         for (int i = 0; i < paramNames.length; i++)
         {
-            hql.append(" and po.").append(paramNames[i]).append("=:").append(paramNames[i]);
-            params.put(paramNames[i], (Serializable) paramValues[i]);
+            if (paramNames[i] == null) {
+                hql.append(" and po.").append(paramNames[i]).append(" is null");
+            } else {
+                hql.append(" and po.").append(paramNames[i]).append("=:").append(paramNames[i]);
+                params.put(paramNames[i], (Serializable) paramValues[i]);
+            }
         }
         Query query = createQuery(hql.toString(), params);
         return (Long) query.list().get(0);
@@ -173,6 +196,16 @@ public abstract class AbstractBaseDAO implements BaseDAO
         qeury.setProperties(params);
         return qeury.list();
     }
+    
+    @Override
+    public Long countQueryName(String queryName, Map<String, Serializable> params)
+    {
+        Query qeury = getSession().getNamedQuery(queryName);
+        qeury.setProperties(params);
+        List<Long> ls = qeury.list();
+        if (ls == null || ls.isEmpty()) return 0l;
+        return ls.get(0);
+    }
 
     @Override
     public <T extends Domain> void saveOrUpdate(T bean)
@@ -208,6 +241,18 @@ public abstract class AbstractBaseDAO implements BaseDAO
     public <T extends Domain> T load(Class<T> clazz, Serializable t)
     {
         return (T) sessionFactory.getCurrentSession().load(clazz, t);
+    }
+    
+    @Override
+    public Object get(Serializable t)
+    {
+        return sessionFactory.getCurrentSession().get(clas, t);
+    }
+
+    @Override
+    public Object load(Serializable t)
+    {
+        return (K) sessionFactory.getCurrentSession().load(clas, t);
     }
 
     @Override

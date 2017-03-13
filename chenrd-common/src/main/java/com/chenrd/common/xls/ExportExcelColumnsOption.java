@@ -27,23 +27,14 @@ import org.slf4j.LoggerFactory;
 import com.chenrd.common.columnOption.ColumnOption;
 import com.chenrd.example.Example;
 
-public class ExportExcelColumnsOption<T extends Example> implements Export
+public class ExportExcelColumnsOption implements Export
 {
-    
-    /**
-     * 需要导出的数据
-     */
-    private List<T> list;
-    
-    private Class<T> clazz;
     
     private CellStyle titleStyle;
     
     private CellStyle style;
     
     private List<ColumnOption> options;
-    
-    private String sheetTitle;
     
     private final static Logger LOGGER = LoggerFactory.getLogger(ExportExcelColumnsOption.class);
 
@@ -52,13 +43,10 @@ public class ExportExcelColumnsOption<T extends Example> implements Export
      * @param clazz
      * @param options
      */
-    public ExportExcelColumnsOption(Class<T> clazz, List<T> list, List<ColumnOption> options, String sheetTitle)
+    public ExportExcelColumnsOption(List<ColumnOption> options)
     {
         super();
-        this.list = list;
-        this.clazz = clazz;
         this.options = options;
-        this.sheetTitle = sheetTitle;
     }
     
     /**
@@ -66,15 +54,18 @@ public class ExportExcelColumnsOption<T extends Example> implements Export
      * @param clazz
      * @param options
      */
-    public ExportExcelColumnsOption(Class<T> clazz, List<T> list, String[] options, String sheetTitle)
+    public ExportExcelColumnsOption(String[] options)
     {
         super();
-        this.list = list;
-        this.clazz = clazz;
         this.options = new ArrayList<ColumnOption>();
         for (String option : options)
             this.options.add(new ColumnOption(option, "", true));
-        this.sheetTitle = sheetTitle;
+    }
+    
+    public void setColumnsOption(String[] options) {
+    	this.options = new ArrayList<ColumnOption>();
+        for (String option : options)
+            this.options.add(new ColumnOption(option, "", true));
     }
     
     /**
@@ -83,7 +74,8 @@ public class ExportExcelColumnsOption<T extends Example> implements Export
      * @return 
      * @see
      */
-    public XSSFWorkbook export()
+    @SuppressWarnings("unchecked")
+	public <T> XSSFWorkbook export(String sheetTitle, List<T> list, Class<T> clazz)
     {
         XSSFWorkbook workbook = new XSSFWorkbook();
         titleStyle = workbook.createCellStyle();
@@ -130,12 +122,12 @@ public class ExportExcelColumnsOption<T extends Example> implements Export
             sheet.setColumnWidth(i, 20 * ann.width());
             cell.setCellStyle(titleStyle);
             cell.setCellValue(ann.value());
-            iterationRow(sheet, option.getFieldName(), i++);
+            iterationRow(sheet, (List<? extends Example>) list, option.getFieldName(), i++);
         }
         return workbook;
     }
     
-    public void iterationRow(XSSFSheet sheet, String fieldName, int columnIndex)
+    public <T extends Example> void iterationRow(XSSFSheet sheet, List<T> list, String fieldName, int columnIndex)
     {
         int rowIndex = 1;
         for (T t : list)
