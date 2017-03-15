@@ -13,7 +13,7 @@ package com.chenrd.common.http;
 
 import java.io.IOException;
 import java.io.Serializable;
-
+import java.util.Arrays;
 
 import org.apache.http.Header;
 import org.apache.http.ParseException;
@@ -154,5 +154,14 @@ public class CallResult implements Serializable
     {
         return serialVersionUID;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "CallResult [statusCode=" + statusCode + ", message=" + message + ", reqHeads="
+				+ Arrays.toString(reqHeads) + ", repHeads=" + Arrays.toString(repHeads) + "]";
+	}
     
 }

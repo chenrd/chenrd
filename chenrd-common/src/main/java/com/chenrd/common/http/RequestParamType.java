@@ -23,7 +23,7 @@ public enum RequestParamType {
     
     STRING("string"), JSON("json");
     
-    String type;
+    public String type;
     
     
     RequestParamType(String type)
