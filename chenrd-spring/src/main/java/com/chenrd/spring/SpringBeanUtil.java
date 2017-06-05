@@ -20,8 +20,7 @@ import org.springframework.context.ApplicationContext;
  * @see SpringBeanUtil
  * @since
  */
-public final class SpringBeanUtil
-{
+public final class SpringBeanUtil {
     /**
      * 
      */
@@ -32,16 +31,14 @@ public final class SpringBeanUtil
      * @param applicationContext 
      * @see
      */
-    public static void setApplicationContext(ApplicationContext applicationContext)
-    {
+    public static void setApplicationContext(ApplicationContext applicationContext) {
         SpringBeanUtil.applicationContext = applicationContext;
     }
 
     /**
      * @return Returns the applicationContext.
      */
-    public static ApplicationContext getApplicationContext()
-    {
+    public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
     
@@ -52,8 +49,7 @@ public final class SpringBeanUtil
      * @return Object
      * @see
      */
-    public static Object getObject(String id) 
-    {
+    public static Object getObject(String id) {
         return applicationContext.getBean(id);
     }
     

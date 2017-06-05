@@ -22,224 +22,210 @@ import java.io.Serializable;
  * @see PagingInfo
  * @since
  */
-public class PagingInfo implements Serializable
-{
+public class PagingInfo implements Serializable {
 
-    /**
-     * 意义，目的和功能，以及被用到的地方<br>
-     */
-    private static final long serialVersionUID = -6274032827880059725L;
-    
-    /**
-     * 当前页
-     */
-    private int current = 1;
-    
-    /**
-     * 每页显示
-     */
-    private int pageSize = 20;
-    
-    /**
-     * 总行数
-     */
-    private long totalRows;
-    
-    /**
-     * 总页数
-     */
-    private int totalPages;
-    
-    /**
-     * 上一页
-     */
-    private boolean prePage;
-    
-    /**
-     * 下一页
-     */
-    private boolean nextPage;
-    
-    /**
-     * 
-     */
-    private Integer sEcho;
-    
-    private int iDisplayLength;
-    
-    private int iDisplayStart;
-    
+	/**
+	 * 意义，目的和功能，以及被用到的地方<br>
+	 */
+	private static final long serialVersionUID = -6274032827880059725L;
 
-    /**
-     * @param current
-     * @param pageSize
-     */
-    public PagingInfo(int current, int pageSize)
-    {
-        super();
-        this.current = current;
-        this.pageSize = pageSize;
-    }
+	/**
+	 * 当前页
+	 */
+	private int current = 1;
 
-    /**
-     * 
-     */
-    public PagingInfo()
-    {
-        super();
-    }
+	/**
+	 * 每页显示
+	 */
+	private int pageSize = 20;
 
-    /**
-     * @return Returns the current.
-     */
-    public int getCurrent()
-    {
-        return current;
-    }
+	/**
+	 * 总行数
+	 */
+	private long totalRows;
 
-    /**
-     * @param current The current to set.
-     */
-    public void setCurrent(int current)
-    {
-        this.current = current;
-    }
+	/**
+	 * 总页数
+	 */
+	private int totalPages;
 
-    /**
-     * @return Returns the pageSize.
-     */
-    public int getPageSize()
-    {
-        return pageSize;
-    }
+	/**
+	 * 上一页
+	 */
+	private boolean prePage;
 
-    /**
-     * @param pageSize The pageSize to set.
-     */
-    public void setPageSize(int pageSize)
-    {
-        this.pageSize = pageSize;
-    }
+	/**
+	 * 下一页
+	 */
+	private boolean nextPage;
 
-    /**
-     * @return Returns the totalRows.
-     */
-    public long getTotalRows()
-    {
-        return totalRows;
-    }
+	/**
+	 * 
+	 */
+	private Integer sEcho;
 
-    /**
-     * @param totalRows The totalRows to set.
-     */
-    public void setTotalRows(long totalRows)
-    {
-        this.totalRows = totalRows;
-    }
+	private int iDisplayLength;
 
-    /**
-     * @return Returns the totalPages.
-     */
-    public int getTotalPages()
-    {
-        return totalPages;
-    }
+	private int iDisplayStart;
 
-    /**
-     * @param totalPages The totalPages to set.
-     */
-    public void setTotalPages(int totalPages)
-    {
-        this.totalPages = totalPages;
-    }
+	/**
+	 * @param current
+	 * @param pageSize
+	 */
+	public PagingInfo(int current, int pageSize) {
+		super();
+		this.current = current;
+		this.pageSize = pageSize;
+	}
 
-    /**
-     * @return Returns the prePage.
-     */
-    public boolean isPrePage()
-    {
-        return prePage;
-    }
+	/**
+	 * 
+	 */
+	public PagingInfo() {
+		super();
+	}
 
-    /**
-     * @param prePage The prePage to set.
-     */
-    public void setPrePage(boolean prePage)
-    {
-        this.prePage = prePage;
-    }
+	/**
+	 * @return Returns the current.
+	 */
+	public int getCurrent() {
+		return current;
+	}
 
-    /**
-     * @return Returns the nextPage.
-     */
-    public boolean isNextPage()
-    {
-        return nextPage;
-    }
+	/**
+	 * @param current
+	 *            The current to set.
+	 */
+	public void setCurrent(int current) {
+		this.current = current;
+	}
 
-    /**
-     * @param nextPage The nextPage to set.
-     */
-    public void setNextPage(boolean nextPage)
-    {
-        this.nextPage = nextPage;
-    }
+	/**
+	 * @return Returns the pageSize.
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}
 
-    /**
-     * @return Returns the serialversionuid.
-     */
-    public static long getSerialversionuid()
-    {
-        return serialVersionUID;
-    }
+	/**
+	 * @param pageSize
+	 *            The pageSize to set.
+	 */
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
 
-    /**
-     * @return Returns the sEcho.
-     */
-    public Integer getsEcho()
-    {
-        return sEcho;
-    }
+	/**
+	 * @return Returns the totalRows.
+	 */
+	public long getTotalRows() {
+		return totalRows;
+	}
 
-    /**
-     * @param sEcho The sEcho to set.
-     */
-    public void setsEcho(Integer sEcho)
-    {
-        this.sEcho = sEcho;
-    }
+	/**
+	 * @param totalRows
+	 *            The totalRows to set.
+	 */
+	public void setTotalRows(long totalRows) {
+		this.totalRows = totalRows;
+	}
 
-    /**
-     * @return Returns the iDisplayLength.
-     */
-    public int getiDisplayLength()
-    {
-        return iDisplayLength;
-    }
+	/**
+	 * @return Returns the totalPages.
+	 */
+	public int getTotalPages() {
+		return totalPages;
+	}
 
-    /**
-     * @param iDisplayLength The iDisplayLength to set.
-     */
-    public void setiDisplayLength(int iDisplayLength)
-    {
-        this.iDisplayLength = iDisplayLength;
-        this.pageSize = iDisplayLength;
-    }
+	/**
+	 * @param totalPages
+	 *            The totalPages to set.
+	 */
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
 
-    /**
-     * @return Returns the iDisplayStart.
-     */
-    public int getiDisplayStart()
-    {
-        return iDisplayStart;
-    }
+	/**
+	 * @return Returns the prePage.
+	 */
+	public boolean isPrePage() {
+		return prePage;
+	}
 
-    /**
-     * @param iDisplayStart The iDisplayStart to set.
-     */
-    public void setiDisplayStart(int iDisplayStart)
-    {
-        this.iDisplayStart = iDisplayStart;
-        this.current = (this.iDisplayStart / this.pageSize) + 1;
-    }
+	/**
+	 * @param prePage
+	 *            The prePage to set.
+	 */
+	public void setPrePage(boolean prePage) {
+		this.prePage = prePage;
+	}
+
+	/**
+	 * @return Returns the nextPage.
+	 */
+	public boolean isNextPage() {
+		return nextPage;
+	}
+
+	/**
+	 * @param nextPage
+	 *            The nextPage to set.
+	 */
+	public void setNextPage(boolean nextPage) {
+		this.nextPage = nextPage;
+	}
+
+	/**
+	 * @return Returns the serialversionuid.
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
+	 * @return Returns the sEcho.
+	 */
+	public Integer getsEcho() {
+		return sEcho;
+	}
+
+	/**
+	 * @param sEcho
+	 *            The sEcho to set.
+	 */
+	public void setsEcho(Integer sEcho) {
+		this.sEcho = sEcho;
+	}
+
+	/**
+	 * @return Returns the iDisplayLength.
+	 */
+	public int getiDisplayLength() {
+		return iDisplayLength;
+	}
+
+	/**
+	 * @param iDisplayLength
+	 *            The iDisplayLength to set.
+	 */
+	public void setiDisplayLength(int iDisplayLength) {
+		this.iDisplayLength = iDisplayLength;
+		this.pageSize = iDisplayLength;
+	}
+
+	/**
+	 * @return Returns the iDisplayStart.
+	 */
+	public int getiDisplayStart() {
+		return iDisplayStart;
+	}
+
+	/**
+	 * @param iDisplayStart
+	 *            The iDisplayStart to set.
+	 */
+	public void setiDisplayStart(int iDisplayStart) {
+		this.iDisplayStart = iDisplayStart;
+		this.current = (this.iDisplayStart / this.pageSize) + 1;
+	}
 }

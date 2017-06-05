@@ -26,80 +26,36 @@ import com.chenrd.example.Example;
  * @see BaseDAO
  * @since
  */
-public interface BaseDAO extends DAO
-{
+public interface BaseDAO extends DAO {
+	
+	List<? extends Example> find(String hql, Map<String, Serializable> params);
+	
+	List<? extends Example> findPaging(String hql, String countHql, Map<String, Serializable> params, Paging paging);
     
-    List<? extends Example> findPaging(String hql, String countHql, Map<String, Serializable> params, Paging paging);
-    
+	
+	<T extends Domain> List<T> findByProperty(Class<T> clazz, String paramName, Serializable paramValue);
+	
+	<T extends Domain> List<T> findByProperty(Class<T> clazz, String paramName, Serializable paramValue, String orderStr, String descStr);
     /**
      * 
-     * @param hql
-     * @param params
      * @return 
      * @see
      */
-    List<? extends Example> find(String hql, Map<String, Serializable> params);
+    <T extends Domain> List<T> findByPropertys(Class<T> clazz, String[] paramNames, Object[] paramValues);
+    
+    <T extends Domain> List<T> findByPropertys(Class<T> clazz, String[] paramNames, Object[] paramValues, String orderStr, String descStr);
     /**
      * 
-     * 
-     * @param clazz
-     * @param params
-     * @return 
-     * @see
-     */
-    <T extends Domain> List<T> findByParams(Class<T> clazz, Map<String, Serializable> params);
-    
-    /**
-     * 
-     * @param clazz
-     * @return 
-     * @see
-     */
-    <T extends Domain> List<T> findByProperty(Class<T> clazz, String paramName, Serializable paramValue, String orderName);
-    
-    /**
-     * 
-     * @param clazz
-     * @return 
-     * @see
-     */
-    <T extends Domain> List<T> findByProperty(Class<T> clazz, String paramName, Serializable paramValue, String orderName, String descName);
-    
-    /**
-     * 
-     * 
-     * @param clazz
-     * @param paramNames
-     * @param paramValues
-     * @param orderName
-     * @param descName
-     * @return 
-     * @see
-     */
-    <T extends Domain> List<T> findByProperty(Class<T> clazz, String[] paramNames, Object[] paramValues, String orderName, String descName);
-    
-    
-    /**
-     * 
-     * 
-     * @param clazz
-     * @param paramName
-     * @param paramValue
      * @return 
      * @see
      */
     <T extends Domain> Long countByProperty(Class<T> clazz, String paramName, Object paramValue);
     
     /**
-     * 
-     * 
-     * @param clazz
-     * @param paramNames
-     * @param paramValues
      * @return 
      * @see
      */
-    <T extends Domain> Long countByProperty(Class<T> clazz, String[] paramNames, Object[] paramValues);
+    <T extends Domain> Long countByPropertys(Class<T> clazz, String[] paramNames, Object[] paramValues);
     
     /**
      * 
@@ -126,41 +82,6 @@ public interface BaseDAO extends DAO
     
     Long countQueryName(String queryName, Map<String, Serializable> params);
     
-    /**
-     * 
-     * 保存或更新
-     * @param <T>  Domain子类
-     * @param bean 单个对象
-     * @see
-     */
-    <T extends Domain> void saveOrUpdate(T bean);
-    
-    /**
-     * 
-     * 保存或更新
-     * @param <T>  Domain子类
-     * @param bean 单个对象
-     * @see
-     */
-    <T extends Domain> void save(T bean);
-    
-    /**
-     * 
-     * 更新
-     * @param <T>  Domain子类
-     * @param bean 单个对象
-     * @see
-     */
-    <T extends Domain> void update(T bean);
-    
-    /**
-     * 
-     * 通过id 或者 实体对象删除
-     * @param <T>  Domain子类
-     * @param t Object
-     * @see
-     */
-    <T extends Serializable> void delete(T t);
     
     /**
      * 

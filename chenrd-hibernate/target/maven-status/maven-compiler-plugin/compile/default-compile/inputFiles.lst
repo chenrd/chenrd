@@ -2,7 +2,6 @@ E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\annotation\ManyQueryParams.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\annotation\Copy.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\annotation\FindConstructor.java
-E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\QueryByUsername.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\DAO.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\abs\AbstractBaseDAO.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\info\HqlAttribute.java
@@ -15,4 +14,5 @@ E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\BeanUtil.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\annotation\QueryOrder.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\annotation\NoCopy.java
+E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\abs\AbstractDAO.java
 E:\workFile\newWorkspace\ocean\chenrd\chenrd-hibernate\src\main\java\com\chenrd\dao\info\QueryInfo.java

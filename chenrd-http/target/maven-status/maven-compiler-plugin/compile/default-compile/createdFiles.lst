@@ -1,0 +1,15 @@
+com\chenrd\common\http\RequestParamType.class
+com\chenrd\common\http\HttpClientRegister$1.class
+com\chenrd\common\http\impl\JSONAnalytical.class
+com\chenrd\common\http\exception\HttpFailException.class
+com\chenrd\common\http\exception\AnalysisException.class
+com\chenrd\common\http\HttpClientUtil.class
+com\chenrd\common\http\impl\HtmlAnalytical.class
+com\chenrd\common\http\UriUtils.class
+com\chenrd\common\http\CallResult.class
+com\chenrd\common\http\HttpClientRegister.class
+com\chenrd\common\http\impl\PhpAnalytical.class
+com\chenrd\common\http\StrAnalytical.class
+com\chenrd\common\http\Pull.class
+com\chenrd\common\http\AnalyParma.class
+com\chenrd\common\http\AnalyticalHlep.class

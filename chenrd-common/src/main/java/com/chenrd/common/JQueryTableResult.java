@@ -25,8 +25,7 @@ import com.chenrd.example.PagingInfo;
  * @see JQueryTableResult
  * @since
  */
-public class JQueryTableResult implements Serializable
-{
+public class JQueryTableResult implements Serializable {
     
     /**
      * 意义，目的和功能，以及被用到的地方<br>

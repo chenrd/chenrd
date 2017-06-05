@@ -13,8 +13,7 @@ package com.chenrd.dao.info;
 
 import java.io.Serializable;
 
-public class HqlOrderAttribute implements Serializable
-{
+public class HqlOrderAttribute implements Serializable {
 
     /**
      * 意义，目的和功能，以及被用到的地方<br>
@@ -32,8 +31,7 @@ public class HqlOrderAttribute implements Serializable
      * @param index
      * @param order
      */
-    public HqlOrderAttribute(String fieldName, int index, String order)
-    {
+    public HqlOrderAttribute(String fieldName, int index, String order) {
         super();
         this.fieldName = fieldName;
         this.index = index;
@@ -43,48 +41,42 @@ public class HqlOrderAttribute implements Serializable
     /**
      * @return Returns the fieldName.
      */
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return fieldName;
     }
 
     /**
      * @param fieldName The fieldName to set.
      */
-    public void setFieldName(String fieldName)
-    {
+    public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
     }
 
     /**
      * @return Returns the index.
      */
-    public int getIndex()
-    {
+    public int getIndex() {
         return index;
     }
 
     /**
      * @param index The index to set.
      */
-    public void setIndex(int index)
-    {
+    public void setIndex(int index) {
         this.index = index;
     }
 
     /**
      * @return Returns the order.
      */
-    public String getOrder()
-    {
+    public String getOrder() {
         return order;
     }
 
     /**
      * @param order The order to set.
      */
-    public void setOrder(String order)
-    {
+    public void setOrder(String order) {
         this.order = order;
     }
 }

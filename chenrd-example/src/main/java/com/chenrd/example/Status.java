@@ -11,22 +11,19 @@
 
 package com.chenrd.example;
 
-public interface Status
-{
-    /**
-     * 删除状态
-     */
-    int DELETED = -1;
-    
-    /**
-     * 不启用状态
-     */
-    int OFF = 0;
-    
-    /**
-     * 启用
-     */
-    int NO = 1;
-    
-    int ON = 1;
+public interface Status {
+	/**
+	 * 删除状态
+	 */
+	int DELETED = -1;
+
+	/**
+	 * 不启用状态
+	 */
+	int OFF = 0;
+
+	/**
+	 * 启用
+	 */
+	int ON = 1;
 }

@@ -3,10 +3,10 @@ com\chenrd\dao\BeanUtil.class
 com\chenrd\dao\info\HqlOrderAttribute.class
 com\chenrd\dao\DAO.class
 com\chenrd\dao\annotation\QueryOrder.class
+com\chenrd\dao\abs\AbstractDAO.class
 com\chenrd\dao\annotation\FindConstructor.class
 com\chenrd\dao\annotation\ManyQueryParams.class
 com\chenrd\dao\abs\AbstractBaseDAO.class
-com\chenrd\dao\QueryByUsername.class
 com\chenrd\dao\BuilderHqlException.class
 com\chenrd\dao\info\HqlAttribute.class
 com\chenrd\dao\info\QueryInfo.class

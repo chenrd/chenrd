@@ -10,7 +10,7 @@
 
 package com.chenrd.common;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * chenrd-oss-ex

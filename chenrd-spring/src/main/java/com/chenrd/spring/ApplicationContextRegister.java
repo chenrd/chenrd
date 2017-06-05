@@ -23,13 +23,11 @@ import org.springframework.stereotype.Component;
  * @since
  */
 @Component
-public class ApplicationContextRegister implements ApplicationContextAware
-{
+public class ApplicationContextRegister implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
-        throws BeansException
-    {
+        throws BeansException {
         SpringBeanUtil.setApplicationContext(applicationContext);
     }
 

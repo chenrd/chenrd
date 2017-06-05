@@ -86,8 +86,7 @@ public class XlsExPort implements Export
         baseStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
     }
     
-    public <T> XSSFWorkbook export(String sheetTitle, List<T> list, Class<T> clas)
-    {
+    public <T> XSSFWorkbook export(String sheetTitle, List<T> list, Class<T> clas) {
     	sheet = workbook.createSheet(sheetTitle);
         sheet.setDefaultRowHeightInPoints(20);  
         exportWorkbook(sheetTitle, list, clas);
@@ -95,14 +94,11 @@ public class XlsExPort implements Export
         return workbook;
     }
     
-    private <T> void exportWorkbook(String sheetTitle, List<T> list, Class<T> clas)
-    {
+    private <T> void exportWorkbook(String sheetTitle, List<T> list, Class<T> clas) {
         XSSFRow titleRow = sheet.createRow(0);
-        for (Field field : clas.getDeclaredFields())
-        {
+        for (Field field : clas.getDeclaredFields()) {
             XlsPortAnnotate annotate = field.getAnnotation(XlsPortAnnotate.class);
-            if (annotate == null || !annotate.isExport())
-            {
+            if (annotate == null || !annotate.isExport()) {
                 continue;
             }
             Cell cell = titleRow.createCell(columnIndex);
@@ -110,8 +106,7 @@ public class XlsExPort implements Export
             cell.setCellStyle(titleStyle);
             cell.setCellValue(annotate.value());
             
-            try
-            {
+            try {
                 if (field.getType().isAssignableFrom(boolean.class) || field.getType().isAssignableFrom(Boolean.class))
                     method = clas.getDeclaredMethod(methodPrefix[1] + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
                 else
@@ -119,14 +114,10 @@ public class XlsExPort implements Export
                 
                 this.field = field;
                 iterationRow(list);
-            }
-            catch (NoSuchMethodException | SecurityException e)
-            {
+            } catch (NoSuchMethodException | SecurityException e) {
                 LOG.warn("导出字段：{}失败，没有找到字段的getset方法", field.getName());
                 continue;
-            }
-            catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-            {
+            } catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 LOG.warn("导出字段：{}失败，调用字段的getset方法的时候错误", field.getName(), e);
                 continue;
             }

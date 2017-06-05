@@ -32,36 +32,31 @@ import com.chenrd.common.ocp.NoCopy.NoCopyType;
  * @see BeanCopyUtils
  * @since
  */
-public final class BeanCopyUtils
-{
+public final class BeanCopyUtils {
     
     //日志
     public static final Logger LOG = LoggerFactory.getLogger(BeanCopyUtils.class);
     
     @SuppressWarnings("unchecked")
-    public static <F, T> T copy(F form, T to, boolean currentNoCopy)
-    {
+    public static <F, T> T copy(F form, T to, boolean currentNoCopy) {
         return (T) copy(form, form.getClass(), to, to.getClass(), currentNoCopy);
     }
     
-    public static <T> T copy(Object form, Class<T> toClass, boolean currentNoCopy)
-    {
+    public static <T> T copy(Object form, Class<T> toClass, boolean currentNoCopy) {
         return copy(form, form.getClass(), null, toClass, currentNoCopy);
     }
     
-    private static <F, T> T copy(Object form, Class<F> formClass, T toObject, Class<? extends T> toClass, boolean currentNoCopy)
-    {
+    private static <F, T> T copy(Object form, Class<F> formClass, T toObject, Class<? extends T> toClass, boolean currentNoCopy) {
         NoCopy noCopy = null;Method setMethod = null;
-        if (toObject == null) try
-        {
-            toObject = toClass.newInstance();
+        if (toObject == null) {
+        	try {
+                toObject = toClass.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException("拷贝失败，toClass{" + toClass.getName() + "}没有公共的无参数构造方法");
+            }
         }
-        catch (InstantiationException | IllegalAccessException e)
-        {
-            throw new RuntimeException("拷贝失败，toClass{" + toClass.getName() + "}没有公共的无参数构造方法");
-        }
-        for (Field field : formClass.getDeclaredFields())
-        {
+        
+        for (Field field : formClass.getDeclaredFields()) {
             //如果是一个静态属性，那么不需要拷贝
             if (Modifier.isStatic(field.getModifiers())) continue;
             //属性被标注了永久不拷贝
@@ -77,12 +72,9 @@ public final class BeanCopyUtils
             
             DateFormat dateFormat = field.getAnnotation(DateFormat.class);
             if (fieldValue instanceof Date) fieldValue = DateUtil.formatDate((Date) fieldValue, dateFormat != null ? dateFormat.value().format : Format.yMd.format);
-            try
-            {
+            try {
                 setMethod.invoke(toObject, fieldValue);
-            }
-            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-            {
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 LOG.info("拷贝属性时候发送错误，错误原因：没有权限执行目标:{}的方法:{}, ..{}", toClass.getName(), setMethod.getName(), e.getMessage());
             }
         }
@@ -91,39 +83,31 @@ public final class BeanCopyUtils
         return toObject;
     }
     
-    public static Object getFieldValue(Object form, Class<?> formClass, Field field)
-    {
+    public static Object getFieldValue(Object form, Class<?> formClass, Field field) {
         String prefix = "get";
-        if (field.getType().isAssignableFrom(boolean.class))
-            prefix = "is";
+        if (field.getType().isAssignableFrom(boolean.class)) {
+        	prefix = "is";
+        }
         Method mehtod = getMethod(formClass, generateMethodName(prefix, field.getName()));
         if (mehtod == null) return null;
-        try
-        {
+        try {
             return mehtod.invoke(form);
-        }
-        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-        {
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             LOG.info("拷贝属性时候发送错误，错误原因：没有权限执行目标:{}的方法:{}, ..{}", formClass.getName(), mehtod.getName(), e.getMessage());
         }
         return null;
     }
     
-    private static Method getMethod(Class<?> clazz, String methodName, Class<?>... types)
-    {
-        try
-        {
+    private static Method getMethod(Class<?> clazz, String methodName, Class<?>... types) {
+        try {
             return clazz.getMethod(methodName, types);
-        }
-        catch (NoSuchMethodException | SecurityException e)
-        {
+        } catch (NoSuchMethodException | SecurityException e) {
             LOG.info("拷贝属性时候发送错误，错误原因：没有找到目标:{}.{}({}) ", clazz.getName(), methodName, types);
         }
         return null;
     }
     
-    private static String generateMethodName(String prefix, String fieldName)
-    {
+    private static String generateMethodName(String prefix, String fieldName) {
         if (fieldName.charAt(1) <= 90)
             return prefix + fieldName;
         return prefix + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
@@ -132,8 +116,7 @@ public final class BeanCopyUtils
     /**
      * 帮组类不被new
      */
-    private BeanCopyUtils()
-    {
+    private BeanCopyUtils() {
         
     }
 }

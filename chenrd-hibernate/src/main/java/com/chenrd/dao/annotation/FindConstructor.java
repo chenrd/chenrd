@@ -21,8 +21,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.CONSTRUCTOR)
-public @interface FindConstructor
-{
+public @interface FindConstructor {
     /**
      * 对应方法名称
      * 

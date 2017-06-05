@@ -37,6 +37,8 @@ public class ExportExcelColumnsOption implements Export
     private List<ColumnOption> options;
     
     private final static Logger LOGGER = LoggerFactory.getLogger(ExportExcelColumnsOption.class);
+    
+    private XSSFWorkbook workbook = new XSSFWorkbook();
 
     /**
      * @param list
@@ -47,6 +49,25 @@ public class ExportExcelColumnsOption implements Export
     {
         super();
         this.options = options;
+        
+        titleStyle = workbook.createCellStyle();
+        titleStyle.setBorderBottom((short) 1);
+        titleStyle.setBorderRight((short) 1);
+        titleStyle.setBorderLeft((short) 1);
+        titleStyle.setBorderTop((short) 1);
+        titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        titleStyle.setAlignment(CellStyle.ALIGN_CENTER);
+        
+        XSSFFont font = workbook.createFont();
+        font.setBold(true);
+        titleStyle.setFont(font);
+        
+        style = workbook.createCellStyle();
+        style.setBorderBottom((short) 1);
+        style.setBorderRight((short) 1);
+        style.setBorderLeft((short) 1);
+        style.setBorderTop((short) 1);
+        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
     }
     
     /**
@@ -77,25 +98,6 @@ public class ExportExcelColumnsOption implements Export
     @SuppressWarnings("unchecked")
 	public <T> XSSFWorkbook export(String sheetTitle, List<T> list, Class<T> clazz)
     {
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        titleStyle = workbook.createCellStyle();
-        titleStyle.setBorderBottom((short) 1);
-        titleStyle.setBorderRight((short) 1);
-        titleStyle.setBorderLeft((short) 1);
-        titleStyle.setBorderTop((short) 1);
-        titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-        titleStyle.setAlignment(CellStyle.ALIGN_CENTER);
-        XSSFFont font = workbook.createFont();
-        font.setBold(true);
-        titleStyle.setFont(font);
-        
-        style = workbook.createCellStyle();
-        style.setBorderBottom((short) 1);
-        style.setBorderRight((short) 1);
-        style.setBorderLeft((short) 1);
-        style.setBorderTop((short) 1);
-        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-        
         XSSFSheet sheet = workbook.createSheet(sheetTitle);
         sheet.setDefaultRowHeightInPoints(20);  
         XSSFRow titleRow = sheet.createRow(0);

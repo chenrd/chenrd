@@ -34,33 +34,31 @@ import freemarker.template.TemplateModel;
  * @see UrlLable
  * @since
  */
-public class UrlLable implements TemplateDirectiveModel
-{
+public class UrlLable implements TemplateDirectiveModel {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void execute(Environment env, Map params, TemplateModel[] loopVars,
-                        TemplateDirectiveBody body)
-        throws TemplateException, IOException
-    {
+    public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body)
+        throws TemplateException, IOException {
         Writer out = env.getOut();
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();  
         HttpServletRequest request = attr.getRequest();
-        String url = "";
+        StringBuilder url = new StringBuilder();
         Object paramValue = params.get("value");
         
-        if (paramValue instanceof SimpleScalar) 
-        {
-            url = ((SimpleScalar) paramValue).getAsString();
-            if (!StringUtils.isNotBlank(url)) {
+        if (paramValue instanceof SimpleScalar) {
+        	paramValue = ((SimpleScalar) paramValue).getAsString();
+            if (!StringUtils.isNotBlank((String) paramValue)) {
                 out.write("");
                 return;
             }
-            url = url.substring(0, 1).equals("/") ? url.substring(1) : url;
         }
-        url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() 
-            + request.getContextPath() + "/" + url + (url.indexOf("?") == -1 ? "?" : "&") + "r=" + Math.random();
-        out.write(url);
+        url.append(request.getScheme()).append("://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
+        if (((String) paramValue).charAt(0) != '/') {
+        	url.append('/');
+        }
+        url.append((String) paramValue);
+        out.write(url.toString());
     }
 
 }

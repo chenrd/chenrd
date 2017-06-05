@@ -20,8 +20,7 @@ import java.util.List;
  * @see Tree
  * @since
  */
-public class Tree implements Serializable
-{
+public class Tree implements Serializable {
 
     /**
      * 意义，目的和功能，以及被用到的地方<br>

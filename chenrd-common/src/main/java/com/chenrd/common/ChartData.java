@@ -25,8 +25,7 @@ import com.chenrd.example.VO;
  * @see ChartData
  * @since
  */
-public class ChartData extends VO
-{
+public class ChartData extends VO {
 
     /**
      * 意义，目的和功能，以及被用到的地方<br>
@@ -144,5 +143,4 @@ public class ChartData extends VO
         return serialVersionUID;
     }
 
-    
 }

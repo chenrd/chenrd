@@ -23,37 +23,32 @@ import com.chenrd.example.Status;
 import com.chenrd.example.VO;
 
 @Transactional
-public abstract class AbstractBusiness implements Business
-{
-    
-    public abstract BaseDAO getDAO();
-    
-    public boolean isLog()
-    {
-        return false;
-    }
-    
-    
-    public void publish(Serializable id)
-    {
-        Domain d = getDAO().get(getDAO().getDomClass(), id);
-        d.setStatus(Status.NO == d.getStatus() ? Status.OFF : Status.NO);
-        getDAO().update(d);
-    }
-    
-    public void delete(Serializable id)
-    {
-        Domain d = getDAO().get(getDAO().getDomClass(), id);
-        d.setStatus(Status.DELETED);
-        getDAO().update(d);
-    }
-    
-    public <T extends VO> T get(Serializable id, Class<T> clazz)
-    {
-        Domain d = getDAO().get(getDAO().getDomClass(), id);
-        if (d == null) {
-            return null;
-        }
-        return BeanCopyUtils.copy(d, clazz, false);
-    }
+public abstract class AbstractBusiness implements Business {
+
+	public abstract BaseDAO getDAO();
+
+	public boolean isLog() {
+		return false;
+	}
+
+	
+	public void publish(Serializable id) {
+		Domain d = getDAO().get(getDAO().getDomClass(), id);
+		d.setStatus(Status.ON == d.getStatus() ? Status.OFF : Status.ON);
+		getDAO().update(d);
+	}
+
+	public void delete(Serializable id) {
+		Domain d = getDAO().get(getDAO().getDomClass(), id);
+		d.setStatus(Status.DELETED);
+		getDAO().update(d);
+	}
+
+	public <T extends VO> T get(Serializable id, Class<T> clazz) {
+		Domain d = getDAO().get(getDAO().getDomClass(), id);
+		if (d == null) {
+			return null;
+		}
+		return BeanCopyUtils.copy(d, clazz, false);
+	}
 }

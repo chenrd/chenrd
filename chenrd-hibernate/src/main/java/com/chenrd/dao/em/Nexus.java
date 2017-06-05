@@ -30,13 +30,11 @@ public enum Nexus {
     
     public int type = 1;
     
-    Nexus(String sign)
-    {
+    Nexus(String sign) {
         this.sign = sign;
     }
     
-    Nexus(String sign, int type)
-    {
+    Nexus(String sign, int type) {
         this.sign = sign;
         this.type = type;
     }

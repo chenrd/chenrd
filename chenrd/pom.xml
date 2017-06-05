@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.chenrd</groupId>
   <artifactId>chenrd</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <build>
@@ -86,6 +86,8 @@
 	<properties>
 		<hibernate.version>4.1.0.Final</hibernate.version>
 	  	<spring.version>4.0.0.RELEASE</spring.version>
+	  	<org.slf4j>1.7.6</org.slf4j>
+	  	<chenrd.version>1.0.1-SNAPSHOT</chenrd.version>
 	</properties>
 	<modules>
 		<module>../chenrd-example</module>
@@ -94,8 +96,8 @@
 		<module>../chenrd-ehcache</module>
 		<module>../chenrd-hibernate</module>
 		<module>../chenrd-business</module>
-		
-		<module>../chenrd-quartz</module>
 		<module>chenrd-test</module>
+		<module>../chenrd-executor</module>
+		<module>../chenrd-http</module>
 	</modules>
 </project>

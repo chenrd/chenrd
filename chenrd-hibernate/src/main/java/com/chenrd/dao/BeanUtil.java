@@ -1,13 +1,3 @@
-/*
- * 文件名：BeanUtil.java
- * 描述：
- * 修改人：chenrd
- * 修改时间：2015年5月18日
- * 跟踪单号：
- * 修改单号：
- * 修改内容：
- */
-
 package com.chenrd.dao;
 
 import java.io.Serializable;
@@ -30,14 +20,13 @@ import com.chenrd.example.Domain;
 import com.chenrd.example.Example;
 
 /**
- * 
+ * 实体拷贝
  * @author chenrd
  * @version 2015年5月18日
  * @see BeanUtil
  * @since
  */
-public final class BeanUtil
-{
+public final class BeanUtil {
     /**
      * 
      */
@@ -52,18 +41,16 @@ public final class BeanUtil
      * @return List<to>
      * @see
      */
-    public static <F extends Example, T extends Example>  List<T> returnList(List<F> list, Class<T> toClass) 
-    {
+    public static <F extends Example, T extends Example>  List<T> returnList(List<F> list, Class<T> toClass)  {
+    	if (list == null) {
+    		return null;
+    	}
         List<T> vos = new ArrayList<T>();
-        for (F f : list)
-        {
+        for (F f : list) {
             T t;
-            try
-            {
+            try {
                 t = toClass.newInstance();
-            }
-            catch (InstantiationException | IllegalAccessException e)
-            {
+            } catch (InstantiationException | IllegalAccessException e) {
                 LOG.error("拷贝错误，实例化{}的时候抛出了一个异常：{}", toClass.getName(), e.getMessage());
                 return null;
             }
@@ -80,34 +67,27 @@ public final class BeanUtil
      * @param to 拷贝到该bean
      * @see
      */
-    public static void copyProperties(Serializable form, Serializable to) 
-    {
+    public static void copyProperties(Serializable form, Serializable to)  {
         List<Field> fields = new ArrayList<Field>();
-        for (Field field : ((Class<?>) to.getClass().getGenericSuperclass()).getDeclaredFields())
-        {
+        for (Field field : ((Class<?>) to.getClass().getGenericSuperclass()).getDeclaredFields()) {
             if (field.getAnnotation(NoCopy.class) == null) fields.add(field);
         }
-        for (Field field : to.getClass().getDeclaredFields())
-        {
+        for (Field field : to.getClass().getDeclaredFields()) {
             if (field.getAnnotation(NoCopy.class) == null) fields.add(field);
         }
+        
         Object value = null;
-        for (Field field : fields) 
-        {
+        for (Field field : fields) {
             if (Modifier.isStatic(field.getModifiers())) continue;
             Copy copy = field.getAnnotation(Copy.class);
-            if (copy != null)
-            {
+            if (copy != null) {
                 String[] s = copy.value().split("\\.");
                 Domain domain = (Domain) form;
-                for (int i = 0; i < s.length - 1; i++) 
-                {
+                for (int i = 0; i < s.length - 1; i++)  {
                     domain = (Domain) domain.get(s[i]);
                 }
                 if (domain != null) value = domain.get(s[s.length - 1]);
-            } 
-            else
-            {
+            } else {
                 Field formField = null;
                 try {
                     formField = form.getClass().getDeclaredField(field.getName());
@@ -202,8 +182,7 @@ public final class BeanUtil
      * @return 方法名称
      * @see
      */
-    private static String getFieldMethodName(Field field) 
-    {
+    private static String getFieldMethodName(Field field) {
         String getMethod = "";
         if (field.getType().isAssignableFrom(boolean.class)) 
         {
@@ -223,16 +202,14 @@ public final class BeanUtil
      * @return 新字符串
      * @see
      */
-    private static String firstLetterUpperCase(String str) 
-    {
+    private static String firstLetterUpperCase(String str) {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
     
     /**
      * 
      */
-    private BeanUtil() 
-    {
+    private BeanUtil()  {
         
     }
 }

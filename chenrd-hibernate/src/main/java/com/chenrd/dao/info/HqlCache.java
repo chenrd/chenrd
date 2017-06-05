@@ -24,8 +24,7 @@ import com.chenrd.ehcache.CacheInterface;
 import com.chenrd.ehcache.EhcacheFactory;
 
 
-public class HqlCache implements CacheInterface<String, String>
-{
+public class HqlCache implements CacheInterface<String, String> {
     
     private static EhcacheFactory cacheFactory = EhcacheFactory.getEhcacheFactory();
     
@@ -45,8 +44,7 @@ public class HqlCache implements CacheInterface<String, String>
     
     private static CacheInterface<String, String> cacheInterface = null;
     
-    public static CacheInterface<String, String> getHqlCache()
-    {
+    public static CacheInterface<String, String> getHqlCache() {
          
         if (cacheInterface == null) {
             cacheInterface = new HqlCache();
@@ -75,14 +73,12 @@ public class HqlCache implements CacheInterface<String, String>
         return cacheInterface;
     }
     
-    private HqlCache()
-    {
+    private HqlCache() {
         
     }
 
     @Override
-    public void put(String k, String v)
-    {
+    public void put(String k, String v) {
         cache.put(k, v);
     }
     

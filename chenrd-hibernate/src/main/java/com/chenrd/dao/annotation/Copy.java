@@ -26,8 +26,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Copy
-{
+public @interface Copy {
     /**
      * 
      * 

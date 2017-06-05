@@ -15,13 +15,12 @@ import java.io.Serializable;
 
 import com.chenrd.example.VO;
 
-public interface Business
-{
-    
-    void publish(Serializable id);
-    
-    void delete(Serializable id);
-    
-    <T extends VO> T get(Serializable id, Class<T> clazz);
-    
+public interface Business {
+
+	void publish(Serializable id);
+
+	void delete(Serializable id);
+
+	<T extends VO> T get(Serializable id, Class<T> clazz);
+
 }

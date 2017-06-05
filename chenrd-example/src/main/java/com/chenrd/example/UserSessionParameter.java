@@ -18,31 +18,29 @@ package com.chenrd.example;
  * @see UserSessionParameter
  * @since
  */
-public interface UserSessionParameter
-{
-    
-    public static final String OSS_DEFAULT_ADMIN = "root";
-    
-    /**
-     * 
-     */
-    public static final String OSS_SESSION_USER_ID = "oss_session_user_id";
-    
-    /**
-     * 
-     */
-    public static final String OSS_SESSION_USER_NAME = "oss_session_user_name";
-    
-    /**
-     * 用户session存货时间
-     */
-    public static final String OSS_SESSION_USER_TOKEN = "oss_session_user_token";
-    
-    /**
-     * 
-     */
-    public static final String OSS_SESSION_USER_SUBJECT = "oss_session_user_subject";
-    
-    
-    public static final String OSS_SESSION_USER_TYPE = "oss_session_user_type";
+public interface UserSessionParameter {
+
+	public static final String OSS_DEFAULT_ADMIN = "root";
+
+	/**
+	 * 
+	 */
+	public static final String OSS_SESSION_USER_ID = "oss_session_user_id";
+
+	/**
+	 * 
+	 */
+	public static final String OSS_SESSION_USER_NAME = "oss_session_user_name";
+
+	/**
+	 * 用户session存货时间
+	 */
+	public static final String OSS_SESSION_USER_TOKEN = "oss_session_user_token";
+
+	/**
+	 * 
+	 */
+	public static final String OSS_SESSION_USER_SUBJECT = "oss_session_user_subject";
+
+	public static final String OSS_SESSION_USER_TYPE = "oss_session_user_type";
 }

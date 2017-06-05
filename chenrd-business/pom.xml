@@ -3,7 +3,7 @@
   <artifactId>chenrd-business</artifactId>
   <parent>
   	<groupId>com.chenrd</groupId>
-  	<version>0.0.2-SNAPSHOT</version>
+  	<version>1.0.1-SNAPSHOT</version>
   	<artifactId>chenrd</artifactId>
   </parent>
   
@@ -27,12 +27,17 @@
   	<dependency>
   		<groupId>com.chenrd</groupId>
   		<artifactId>chenrd-hibernate</artifactId>
-  		<version>0.0.2-SNAPSHOT</version>
+  		<version>${chenrd.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.chenrd</groupId>
+  		<artifactId>chenrd-spring</artifactId>
+  		<version>${chenrd.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>com.chenrd</groupId>
   		<artifactId>chenrd-example</artifactId>
-  		<version>0.0.2-SNAPSHOT</version>
+  		<version>${chenrd.version}</version>
   	</dependency>
   </dependencies>
 </project>

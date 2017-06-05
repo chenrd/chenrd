@@ -20,8 +20,7 @@ import java.io.Serializable;
  * @see QueryInfo
  * @since
  */
-public interface QueryInfo extends Serializable
-{
+public interface QueryInfo extends Serializable {
     
     Object get(String name);
 }
