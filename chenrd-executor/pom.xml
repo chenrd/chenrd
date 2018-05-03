@@ -10,17 +10,16 @@
   	<dependency>
   		<groupId>com.chenrd</groupId>
   		<artifactId>chenrd-spring</artifactId>
-  		<version>${chenrd.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>org.slf4j</groupId>
   		<artifactId>slf4j-log4j12</artifactId>
-  		<version>${org.slf4j}</version>
+		<optional>true</optional>
   	</dependency>
   	<dependency>
   		<groupId>org.slf4j</groupId>
   		<artifactId>slf4j-api</artifactId>
-  		<version>${org.slf4j}</version>
+		<optional>true</optional>
   	</dependency>
   </dependencies>
 </project>

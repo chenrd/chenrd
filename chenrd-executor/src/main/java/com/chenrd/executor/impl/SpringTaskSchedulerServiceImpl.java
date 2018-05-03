@@ -37,7 +37,7 @@ import com.chenrd.executor.TaskParameter;
 public class SpringTaskSchedulerServiceImpl implements SpringTaskSchedulerService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(SpringTaskSchedulerServiceImpl.class);
-	
+
 	@Autowired
 	private TaskScheduler scheduler;
 	

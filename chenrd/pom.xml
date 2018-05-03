@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.chenrd</groupId>
-  <artifactId>chenrd</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  	<modelVersion>4.0.0</modelVersion>
+  	<groupId>com.chenrd</groupId>
+  	<artifactId>chenrd</artifactId>
+  	<version>1.0.1-SNAPSHOT</version>
+  	<packaging>pom</packaging>
   
-  <build>
-  	<pluginManagement>
+  	<build>
+  		<pluginManagement>
 			<plugins>
 				<!-- 编译插件 -->
 				<plugin>
@@ -14,8 +14,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
+						<source>1.8</source>
+						<target>1.8</target>
 					</configuration>
 				</plugin>
 				
@@ -51,25 +51,25 @@
 			        </executions>  
 			      </plugin>
 			</plugins>
-			</pluginManagement>
+		</pluginManagement>
 		<resources>
-	          <resource>
-	              <directory>src/main/resources</directory>
-	          </resource>
-	          <resource>
-	              <directory>src/main/java</directory>
-	              <excludes>
-	                  <exclude>**/*.java</exclude>
-	              </excludes>
-	          </resource>
-	      </resources>
-	      <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ftp</artifactId>
-                <version>1.0-alpha-6</version>
-            </extension>
-           </extensions>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+	        <resource>
+				<directory>src/main/java</directory>
+					<excludes>
+	                  	<exclude>**/*.java</exclude>
+	              	</excludes>
+			</resource>
+		</resources>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+                	<artifactId>wagon-ftp</artifactId>
+                	<version>1.0-alpha-6</version>
+            	</extension>
+		</extensions>
 	</build>
 	<distributionManagement>    
 	    <repository>    
@@ -85,9 +85,19 @@
 	</distributionManagement>
 	<properties>
 		<hibernate.version>4.1.0.Final</hibernate.version>
-	  	<spring.version>4.0.0.RELEASE</spring.version>
-	  	<org.slf4j>1.7.6</org.slf4j>
+	  	<spring.version>4.3.9.RELEASE</spring.version>
+		<spring-webmvc_version>4.3.9.RELEASE</spring-webmvc_version>
+		<org.slf4j>1.7.6</org.slf4j>
 	  	<chenrd.version>1.0.1-SNAPSHOT</chenrd.version>
+		<slf4j.api.version>1.7.5</slf4j.api.version>
+		<slf4j.log4j12.version>1.7.5</slf4j.log4j12.version>
+		<commons-lang_version>2.6</commons-lang_version>
+		<alibaba-fastjson_version>1.2.4</alibaba-fastjson_version>
+		<ehcache_version>3.0.2</ehcache_version>
+		<hibernate-jpa_version>1.0.1.Final</hibernate-jpa_version>
+		<aspectjweaver_version>1.7.1</aspectjweaver_version>
+		<servlet-api_version>2.5</servlet-api_version>
+		<freemarker_version>2.3.23</freemarker_version>
 	</properties>
 	<modules>
 		<module>../chenrd-example</module>
@@ -100,4 +110,68 @@
 		<module>../chenrd-executor</module>
 		<module>../chenrd-http</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-business</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-common</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-ehcache</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-example</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-executor</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-hibernate</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-http</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.chenrd</groupId>
+				<artifactId>chenrd-spring</artifactId>
+				<version>${chenrd.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.log4j12.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+
+	</dependencyManagement>
 </project>

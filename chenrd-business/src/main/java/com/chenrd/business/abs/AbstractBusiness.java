@@ -13,14 +13,13 @@ package com.chenrd.business.abs;
 
 import java.io.Serializable;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.chenrd.business.Business;
 import com.chenrd.common.BeanCopyUtils;
 import com.chenrd.dao.BaseDAO;
 import com.chenrd.example.Domain;
 import com.chenrd.example.Status;
 import com.chenrd.example.VO;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public abstract class AbstractBusiness implements Business {

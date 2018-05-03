@@ -59,7 +59,7 @@ public final class BeanUtil {
         }
         return vos;
     }
-    
+
     /**
      * 
      * 拷贝属性，实体
